@@ -40,7 +40,7 @@ Aside from the obvious motivation of completing the nano degree, the analysis is
 ### 3. What feature correlates to higher prices?
 1. Based on the coefficients for the linear model, it looks like the three highest attributes to determine price is bathrooms, bedrooms and beds.
 
-![Question3Results](/screenshots/FeatureBarChart.PNG)
+![Question3Results](https://github.com/ebrunette/UdacityDataScienceNanoDegree/blob/documentation_updates/ProjectOne/screenshots/FeatureBarChart.PNG)
 ### 4. What feature correlate to higher overall review ratings?
 1. From visual 3. and analysis the main features that contibute to price is the number of bedrooms, bathrooms, bed, and review scores for the location. 
 
