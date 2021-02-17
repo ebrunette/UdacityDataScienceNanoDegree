@@ -30,7 +30,7 @@ Aside from the obvious motivation of completing the nano degree, the analysis is
 ### 1. Does having more pictures of the house correspond to higher overall reviews or prices for the location?
 1. After some review it appears there is a good coorelation between including pictures and ratings.
 2. This could be just reflecting the overall distribution of reviews for the data though without showing any clear signs of one being better than the other. This is shown in the heatmap from the step 1 analysis. <br>
-<img src="/screenshots/HeatmapOfPictureDistribution.PNG">
+![Question1Results](https://github.com/ebrunette/UdacityDataScienceNanoDegree/blob/documentation_updates/ProjectOne/screenshots/HeatmapOfPictureDistribution.PNG)
 
 ### 2. Is square feet correlated to price?
 1. Since there is only 97 rows with square feet not null, this questions will be excluded from investigation
