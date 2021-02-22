@@ -38,10 +38,13 @@ After the database has been created, then the next step is to train the model th
 After that, the main scripts should be completed, and the web app will be able to be ran, assuming the local environment is correct for running the web app. More on this in the "How to run the web app" section below. 
 
 # How to run the web app
+NOTE: Before you run this file, you will have to train the model. I attempted to upload the pkl file to GitHub, but there is a limit of 100MB file size on GitHub. The file was 500MB, so it errored. 
 1. Naviage to 'WebApp/app/' folder. 
 2. Run 'python run.py'
 3. To view the web app at the following website:
    * http://0.0.0.0:3001/
+4. If the above link doesn't work, then try the following link in a web browser:
+    * localhost:3001/
 
 # Files in the repo
 ### categories.csv
