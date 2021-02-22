@@ -1,6 +1,8 @@
 import sys
 import pandas as pd 
 from sqlalchemy import create_engine
+import sqlite3
+import os
 
 def load_data(messages_filepath, categories_filepath):
     messages = pd.read_csv(messages_filepath)
@@ -29,8 +31,16 @@ def clean_data(df):
 
 
 def save_data(df, database_filename):
-    engine = create_engine(database_filename)
-    df.to_sql('messages_df', engine, index=False)
+    try: 
+        engine = create_engine(database_filename)
+        df.to_sql('messages_df', engine, index=False)
+    except: 
+        print("Deleting old database.")
+        os.remove('./data/{}'.format('DisasterResponse.db'))
+        
+        print("Creating new table") 
+        engine = create_engine(database_filename)
+        df.to_sql('messages_df', engine, index=False)
     pass
 
 

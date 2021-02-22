@@ -1,6 +1,7 @@
 import sys
 import re
 import pandas as pd
+import numpy as np
 import sqlite3
 import nltk
 nltk.download('averaged_perceptron_tagger')
@@ -98,14 +99,14 @@ def evaluate_model(model, X_test, Y_test, category_names):
     https://www.kaggle.com/suveesh/grid-search-pipeline-sample
     '''
     predictions = model.predict(X_test)
-    test_model(predictions, Y_test)
+    #test_model(predictions, Y_test)
     labels = np.unique(predictions)
-    confusion_mat = confusion_matrix(Y_test, predictions, labels)
+    confusion_mat = classification_report(Y_test, predictions, labels)
     
-    accuracy = (y_pred == y_test).mean()
+    accuracy = (predictions == Y_test).mean()
     print("Confusion Matrix:\n", confusion_mat)
     print("Accuracy:", accuracy)
-    print("\nBest Parameters:", cv.best_params_)
+    print("\nBest Parameters:", model.best_params_)
     pass
 
 
