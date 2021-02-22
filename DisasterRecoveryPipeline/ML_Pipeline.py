@@ -39,6 +39,21 @@ class StartingVerbExtractor(BaseEstimator, TransformerMixin):
         return pd.DataFrame(X_tagged)
 
 def load_data():
+    """
+    Reads in the appropriate files that are hard coded into the methods.
+
+    Input: None, There are no input files for this method
+    type_input: None
+    Output: 
+        X: The features used for training the model
+        Y: The classifications the model is going to be predicting.
+    type_output: 
+        X: pd.DataFrame
+        Y: pd.DataFrame
+    Return: 
+        The cleaned datasets for training. 
+    """
+
     # read in file
     messages = pd.read_csv('./messages.csv')
     categories = pd.read_csv('./categories.csv')
@@ -71,6 +86,15 @@ def load_data():
     return X, Y
 
 def tokenize(text):
+    """
+    Cleans the text and prepares it for modeling. 
+
+    input: String that represents the tweet text. 
+    type_input: str
+    output: The cleaned tokens used for modeling
+    type_output: List
+    Returns: A list of elements tokenized for modeling. 
+    """
     # tokenize text
     tokens = nltk.tokenize.word_tokenize(text)
     
@@ -88,6 +112,15 @@ def tokenize(text):
     return clean_tokens
     
 def build_model():
+    """
+    Builds the pipeline and Grid Search CV used for training the model
+
+    input: N/A
+    type_input: None
+    output: The model pipeline as a GridSearchCV object
+    type_output: GridSearchCV
+    Returns: The pipelined GridSearchCV object used in training and predicting the model. 
+    """
     # text processing and model pipeline
     pipeline_it1 = Pipeline([
         ('features', FeatureUnion([
@@ -137,6 +170,23 @@ def test_model(predictions, Y_test):
         print(classification_report(Y_test_compare[Y_test_compare.columns[i]], predictions[:,i]))
 
 def train(X, y, model):
+    """
+    Trains the model passed in. 
+
+    input: 
+        X: The features for the model to train on. 
+        y: The target feature for prediction
+        model: The model object to the be trained
+    type_input: 
+        X: pd.DataFrame
+        y: pd.DataFrame
+        model: GridSearchCV
+    output: 
+        model: A trained model 
+    type_output: 
+        model: Trained GridSearchCV
+    returns: A trained grid search CV object. 
+    """
     # train test split
     X_train, X_test, Y_train, Y_test = train_test_split(X, y, test_size=.33, random_state=42)
 
@@ -151,11 +201,31 @@ def train(X, y, model):
 
 
 def export_model(model):
+    """
+    Outputs the model to a pickle object for reference later in the project. 
+
+    inputs: 
+        model: A trained model for output. 
+    type_inputs: 
+        model: GridSearchCV
+    output: N/A
+    type_output: None
+    Returns: Doesn't return anything, but does save a pkl file in the directory for loading in the web app. 
+    """
     # Export model as a pickle file
     pickle.dump(model, open('model.pkl','wb'))
 
 
 def run_pipeline():
+    """
+    The main driver for this project, and runs the main process. 
+
+    inputs: N/A
+    type_input: None
+    output: N/A
+    type_output: None
+    returns: The process run the above code with the ultimate output being a pickle file representing a trained model. 
+    """
     X, y = load_data()  # run ETL pipeline
     model = build_model()  # build model pipeline
     model = train(X, y, model)  # train model pipeline
