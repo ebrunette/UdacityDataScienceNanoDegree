@@ -221,7 +221,7 @@ def save_model(model, model_filepath):
     type_output: None
     Returns: Doesn't return anything, but does save a pkl file in the directory for loading in the web app. 
     """
-    pickle.dump(model, open('model.pkl','wb'))
+    pickle.dump(model, open('/model/model.pkl','wb'))
     pass
 
 

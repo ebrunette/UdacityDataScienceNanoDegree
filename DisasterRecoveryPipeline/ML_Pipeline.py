@@ -21,8 +21,33 @@ import pickle
 
 
 class StartingVerbExtractor(BaseEstimator, TransformerMixin):
+    """
+    Internal class used for extracting the starting verb for another feature for modeling
 
+    Input: 
+        BaseEstimator: Base estimator class from sklearn.base
+        TransformerMixin: Base estimator class from sklearn.base
+    Type_intput: 
+        BaseEstimator: BaseEstimator 
+        TransformerMixin: TransformerMixin
+    Output: N/A
+    Type_output: None
+    Returns: An object used for providing transformation method for the pipeline of training the model.
+    """
     def starting_verb(self, text):
+        """
+        Method does part of speech tagging for text passed in and returns if it is a starting verb in the string representing a tweet. 
+
+        Input: 
+            text: The text of the tweet for disaster recovery. 
+        Type_input: 
+            text: str
+        Output: 
+            True: If there is a verb in the sentence 
+            False: If there isn't a verb in the sentence. 
+        type_output: Bool
+        Returns: A boolean to determine if there is a starting verb in the text for classification. 
+        """
         sentence_list = nltk.sent_tokenize(text.strip())
         for sentence in sentence_list:
             pos_tags = nltk.pos_tag(tokenize(sentence))
@@ -32,9 +57,25 @@ class StartingVerbExtractor(BaseEstimator, TransformerMixin):
         return False
 
     def fit(self, x, y=None):
+        """
+        A stubbed out method for fitting a model that doesn't apply here but allows this class to be used in a pipeline. 
+        No more documentation will be filled out until this method get's filled in. 
+        """
         return self
 
     def transform(self, X):
+        """
+        Method that transfroms the incoming text data to determine if there is a starting verb. 
+
+        input: 
+            X: A list representing the tweet data 
+        type_input: 
+            X: list
+        output: 
+            X_tagged: DataFrame with the transformed data representing a new feature for modeling. 
+        type_output: 
+            X_tagged: pd.DataFrame
+        """
         X_tagged = pd.Series(X).apply(self.starting_verb)
         return pd.DataFrame(X_tagged)
 
@@ -148,7 +189,7 @@ def build_model():
 
     return model_pipeline
 
-def test_model(predictions, Y_test):
+def test_model_outcome(predictions, Y_test):
     """ 
     Prints the output of confusion matrixs for the various columns in the dataset 
     
