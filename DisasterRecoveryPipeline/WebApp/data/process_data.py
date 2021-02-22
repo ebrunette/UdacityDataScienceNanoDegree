@@ -5,6 +5,19 @@ import sqlite3
 import os
 
 def load_data(messages_filepath, categories_filepath):
+    """
+    Loads and merges the data. 
+
+    input: 
+        messages_filepath: The filepath for loading in the messages data 
+        categories_filepath: The filepath for leading in the messages data
+    type_input: 
+        messages_filepath: str
+        categories_filepath: str
+    output: the merged dataframe of the input files
+    type_output: pd.DataFrame
+    returns: A raw merged dataframe based on passed in file paths.  
+    """
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
     df = categories.merge(messages, on =['id'])
@@ -12,6 +25,15 @@ def load_data(messages_filepath, categories_filepath):
 
 
 def clean_data(df):
+    """
+    Cleans the dataframe by cleaning up the coclumns, and splitting up some of the data to make it a tidy dataset. 
+
+    input: The dataframe from the load_data method. 
+    type_input: pd.DataFrame
+    output: A modified dataframe with the changes mentioned. 
+    type_output: pd.DataFrame
+    returns: A dataframe near ready for pipeline for modeling and exporting to database. 
+    """
     categories = df['categories'].str.split(';', expand=True)
     row = categories.iloc[0]
     category_colnames = row.apply(lambda x: x.split('-')[0])
@@ -31,6 +53,22 @@ def clean_data(df):
 
 
 def save_data(df, database_filename):
+    """
+    Outputs the dataframe to a database with the passed in database name. 
+    If the database exists, then this method will delete the old database before saving it again. 
+
+    input: 
+        df: Dataframe representing cleaned data from the original inputs
+        datbase_filename: The string of the new database to be created. 
+    type_input: 
+        df: pd.DataFrame
+        database_filename: str
+    output: 
+        A db file in the same directory as this file. 
+    type_output: 
+        database_filename.db file
+    returns: Nothing to the main process but outputs the db file with the appropriate database_filename
+    """
     try: 
         engine = create_engine(database_filename)
         df.to_sql('messages_df', engine, index=False)
@@ -38,7 +76,7 @@ def save_data(df, database_filename):
         print("Deleting old database.")
         os.remove('./data/{}'.format('DisasterResponse.db'))
         
-        print("Creating new table") 
+        print("Creating new database") 
         engine = create_engine(database_filename)
         df.to_sql('messages_df', engine, index=False)
     pass
