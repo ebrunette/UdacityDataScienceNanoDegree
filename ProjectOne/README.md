@@ -38,16 +38,16 @@ Aside from the obvious motivation of completing the nano degree, the analysis is
 ![Question2Results](https://github.com/ebrunette/UdacityDataScienceNanoDegree/blob/master/ProjectOne/screenshots/SquareFeetVisual.PNG)
 
 ### 3. What feature correlates to higher prices?
-1. Based on the coefficients for the linear model, it looks like the three higblob/attributes to determine price is bathrooms, bedrooms and beds.
+1. Based on the coefficients for the linear model, it looks like the three highest attributes to determine price is bathrooms, bedrooms and beds.
 
 ![Question3Results](https://github.com/ebrunette/UdacityDataScienceNanoDegree/blob/master/ProjectOne/screenshots/FeatureBarChart.PNG)
 ### 4. What feature correlate to higher overall review ratings?
-1. From visual 3. and analysis the main features that contibute to price is thblob/ber of bedrooms, bathrooms, bed, and review scores for the location. 
+1. From visual 3. and analysis the main features that contibute to price is number of bedrooms, bathrooms, bed, and review scores for the location. 
 
 ### 5. What days are the most popular? Specifically Weekdays or Weekends?
-1. The data suggests that there is a correlation to the weekends having higherblob/ rate for most of the stats by $5.
-![Question5aResults](https://github.com/ebrunette/UdacityDataScienceNanoDegreeblob//master/ProjectOne/screenshots/WeekdayPriceHistogram.PNG)
-![Question5bResults](https://github.com/ebrunette/UdacityDataScienceNanoDegreeblob//master/ProjectOne/screenshots/WeekendPriceHistogram.PNG)
+1. The data suggests that there is a correlation to the weekends having higher rate for most of the stats by $5.
+![Question5aResults](https://github.com/ebrunette/UdacityDataScienceNanoDegree/blob//master/ProjectOne/screenshots/WeekdayPriceHistogram.PNG)
+![Question5bResults](https://github.com/ebrunette/UdacityDataScienceNanoDegree/blob//master/ProjectOne/screenshots/WeekendPriceHistogram.PNG)
 
 ### 6. Does higher review count correspond to higher prices on the location?
 1. Based on the review from 3, it does not appear so. Actually the review scores negatively attribute to price. I believe this is because of the number of highly rated properties and listings in the dataset.
