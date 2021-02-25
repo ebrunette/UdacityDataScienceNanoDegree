@@ -13,6 +13,17 @@
 # Motivation for the project
 This project is to help provide analysis for tweets to determine if there is help that needs to be sent in sponse to natural disasters. This project has huge relief accounts based on tweets from disaster zones. 
 
+# Summary of the project
+This project has three major parts to it, and they are: 
+1. Clean raw data
+2. Create model
+3. Run Web app. 
+Steps 1. and 2. work in unison to create the final product in step 3. The final product is a web app that displays the classifications from the model from any text that the user puts in the web application. <br> 
+The application looks like the following screenshot. 
+![WebAppScreenshot](/screenshots/webAppScreenshot.jpg?raw=true "WebAppLandingPage")
+Displaying the results after it has competed processing: 
+![DisplayResults](/screenshots/displayResults.jpg?raw=true "DisplayResults")
+
 # How to run the Python scripts
 This project first requires a cleaned db to be created before modeling. This is done by the following steps: 
 1. Run the following command in the terminal after going to the WebApp folder. 
@@ -28,7 +39,7 @@ This project first requires a cleaned db to be created before modeling. This is 
 
 After the database has been created, then the next step is to train the model that was created for this project: 
 1. Run the following command in the terminal after going to WebApp folder. 
-    1. python model/train_classifier.py data/DisasterResponse.db models/classifier.pkl
+    1. python model/train_classifier.py data/DisasterResponse.db model\classifier.pkl
 2. The parameters for the command in 1. are as follows: 
     1. data/DisasterResponse.db 
         1. The db location from the output of the last step. 
@@ -46,12 +57,33 @@ NOTE: Before you run this file, you will have to train the model. I attempted to
 4. If the above link doesn't work, then try the following link in a web browser:
     * localhost:3001/
 
-# Files in the repo
+# Files in the repository
+## File structure
+* WebApp
+    * app
+        * templates
+            * go.html
+            * master.html
+        * run.py
+    * data
+        * disaster_categories.csv
+        * disaster_messages.csv
+        * DisasterResponse.db
+        * process_data.py
+    * model
+        * train_classifier.py
+    * model
+* categories.csv
+* messages.csv
+* ML_Pipeline.py
+* README.md
+
+## File descriptions
 ### categories.csv
 * This file is raw data that is required for running the ML_Pipeline.py file. 
 ### messages.csv
 * This file is raw data that is required for running the ML_Pipeline.py file. 
-# ML_Pipeline.py
+### ML_Pipeline.py
 * This python script is the combined file for running the back end of the web app. 
 ### WebApp/app/run.py
 * This file is required for running the web app. 
