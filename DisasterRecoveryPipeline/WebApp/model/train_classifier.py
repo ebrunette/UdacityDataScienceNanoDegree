@@ -14,7 +14,8 @@ from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.metrics import classification_report
 import pickle
-
+import os
+from pathlib import Path
 
 def load_data(database_filepath):
     """
@@ -38,7 +39,7 @@ def load_data(database_filepath):
     # define features and label arrays
     X = df['message']
     Y = df.drop(['id','message','original','genre'],axis=1)
-    category_colnames = df.columns[-35:]
+    category_colnames = df.columns[-36:]
 
     return X, Y, category_colnames
 
@@ -155,9 +156,9 @@ def build_model():
 
     # define parameters for GridSearchCV
     parameters = {
-        'clf__estimator__criterion':['gini','entropy'],
-        'clf__estimator__min_samples_leaf':[2, 3, 4],
-        'clf__estimator__n_estimators': [50, 100, 200]
+        #'clf__estimator__criterion':['gini','entropy'],
+        'clf__estimator__min_samples_leaf':[2],
+        #'clf__estimator__n_estimators': [50, 100, 200]
     }
 
     # create gridsearch object and return as final model pipeline
@@ -165,7 +166,7 @@ def build_model():
 
     return model_pipeline
 
-def test_model_outcome(predictions, Y_test):
+def test_model_outcome(predictions, Y_test, category_names):
     """ 
     Prints the output of confusion matrixs for the various columns in the dataset 
     
@@ -181,8 +182,11 @@ def test_model_outcome(predictions, Y_test):
     return type: 
         None
     """
+    print(category_names)
+    print(len(predictions[0]))
     
     for i in range(0, len(predictions[0])):
+        print("Category Name: {}".format(category_names[i]))
         Y_test_compare = Y_test.reset_index().drop('index',axis=1)
         print(classification_report(Y_test_compare[Y_test_compare.columns[i]], predictions[:,i]))
 
@@ -205,7 +209,7 @@ def evaluate_model(model, X_test, Y_test, category_names):
     Returns: The evaluation metric results for the model. 
     """
     predictions = model.predict(X_test)
-    test_model_outcome(predictions, Y_test)
+    test_model_outcome(predictions, Y_test, category_names)
     pass
 
 
@@ -221,7 +225,9 @@ def save_model(model, model_filepath):
     type_output: None
     Returns: Doesn't return anything, but does save a pkl file in the directory for loading in the web app. 
     """
-    pickle.dump(model, open('/model/model.pkl','wb'))
+    output_path = os.path.join(os.getcwd(), model_filepath)
+
+    pickle.dump(model, open(output_path,'wb'))
     pass
 
 
@@ -233,15 +239,17 @@ def main():
         X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
         print('Building model...')
         model = build_model()
-        
+
         print('Training model...')
         model.fit(X_train, Y_train)
-        
+
         print('Evaluating model...')
         evaluate_model(model, X_test, Y_test, category_names)
 
         print('Saving model...\n    MODEL: {}'.format(model_filepath))
         save_model(model, model_filepath)
+
+
 
         print('Trained model saved!')
 
