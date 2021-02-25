@@ -21,8 +21,6 @@ This project has three major parts to it, and they are:
 Steps 1. and 2. work in unison to create the final product in step 3. The final product is a web app that displays the classifications from the model from any text that the user puts in the web application. <br> 
 The application looks like the following screenshot. 
 ![WebAppScreenshot](/screenshots/webAppScreenshot.jpg?raw=true "WebAppLandingPage")
-After text has been entered and the ____ button has been pressed, the resulting screenshot should look like: 
-![AfterText](/screenshots/AfterText.jpg?raw=true "AfterText")
 Displaying the results after it has competed processing: 
 ![DisplayResults](/screenshots/displayResults.jpg?raw=true "DisplayResults")
 
