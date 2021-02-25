@@ -20,9 +20,9 @@ This project has three major parts to it, and they are:
 3. Run Web app. 
 Steps 1. and 2. work in unison to create the final product in step 3. The final product is a web app that displays the classifications from the model from any text that the user puts in the web application. <br> 
 The application looks like the following screenshot. 
-![WebAppScreenshot](/screenshots/webAppScreenshot.jpg?raw=true "WebAppLandingPage")
+![WebAppScreenshot](https://github.com/ebrunette/UdacityDataScienceNanoDegree/blob/master/DisasterRecoveryPipeline/screenshots/webAppScreenshot.JPG)
 Displaying the results after it has competed processing: 
-![DisplayResults](/screenshots/displayResults.jpg?raw=true "DisplayResults")
+![DisplayResults](https://github.com/ebrunette/UdacityDataScienceNanoDegree/blob/master/DisasterRecoveryPipeline/screenshots/displayResults.JPG)
 
 # How to run the Python scripts
 This project first requires a cleaned db to be created before modeling. This is done by the following steps: 
