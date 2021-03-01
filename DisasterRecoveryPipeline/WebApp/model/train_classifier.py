@@ -37,6 +37,10 @@ def load_data(database_filepath):
     df = pd.read_sql("SELECT * FROM messages_df", conn)
 
     # define features and label arrays
+    # if the 'related' column is a 2, are primarily composed of tweets that are in a different language. 
+    # I think it would be best to remove them from the dataset to train on. 
+    # As foreign languages are likely a subset and we probably don't have enough information to train an accurate model. 
+    df = df[df['related'] != 2]
     X = df['message']
     Y = df.drop(['id','message','original','genre'],axis=1)
     category_colnames = df.columns[-36:]
