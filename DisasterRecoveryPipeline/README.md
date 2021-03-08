@@ -9,6 +9,7 @@
 6. pickle
 7. flask (web app)
 8. plotly (web app)
+9. collections (web app)
 
 # Motivation for the project
 This project is to help provide analysis for tweets to determine if there is help that needs to be sent in sponse to natural disasters. This project has huge relief accounts based on tweets from disaster zones. 
