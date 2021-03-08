@@ -1,13 +1,17 @@
 import json
 import plotly
 import pandas as pd
+import numpy as np
 import nltk
 
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
+nltk.download('stopwords')
+from nltk.corpus import stopwords
+from collections import Counter
 
 from flask import Flask
-from flask import render_template, request, jsonify
+from flask import render_template, request, jsonify, redirect, url_for, Response
 from plotly.graph_objs import Bar
 from sklearn.externals import joblib
 from sqlalchemy import create_engine
@@ -90,6 +94,29 @@ def tokenize(text):
 engine = create_engine('sqlite:///../data/DisasterResponse.db')
 df = pd.read_sql_table('messages_df', engine)
 
+# Data for visuals
+EDA_df = pd.DataFrame()
+EDA_df['message_length'] = df['message'].apply(lambda x: len(x))
+EDA_df['id'] = df['id']
+text = df['message'].values
+
+counts,bins = np.histogram(EDA_df.message_length, bins=range(0,1000, 100))
+bins = 0.5 * (bins[:-1] + bins[1:])
+
+stop = stopwords.words('english')
+punctuation_to_remove = ['-',',','.','..','(',')']
+for punct in punctuation_to_remove:
+    stop.append(punct)
+EDA_df['tweet_without_stopwords'] = df['message'].apply(lambda x: ' '.join([word for word in x.lower().split() if word not in (stop)]))
+most_common = Counter(" ".join(EDA_df['tweet_without_stopwords']).split()).most_common(20)
+to_add = {}
+to_add['words'] = []
+to_add['counts'] = []
+for count in most_common:
+    to_add['words'].append(count[0])
+    to_add['counts'].append(count[1])
+most_popular = pd.DataFrame(to_add)
+
 # load model
 model = joblib.load("../model/classifier.pkl")
 
@@ -97,31 +124,43 @@ model = joblib.load("../model/classifier.pkl")
 # index webpage displays cool visuals and receives user input text for model
 @app.route('/')
 @app.route('/index')
+#@app.route('/plot.png')
+
 def index():
     
     # extract data needed for visuals
     # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
-    genre_names = list(genre_counts.index)
-    
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
     graphs = [
         {
             'data': [
                 Bar(
-                    x=genre_names,
-                    y=genre_counts
+                    x=bins, y=counts
                 )
             ],
-
             'layout': {
-                'title': 'Distribution of Message Genres',
+                'title': 'Distribution of Message Lengths (Less than 1000 characters)',
                 'yaxis': {
                     'title': "Count"
                 },
                 'xaxis': {
-                    'title': "Genre"
+                    'title': "Message Length"
+                }
+            }
+        },
+        {
+            'data': [
+                Bar(x=most_popular['words'], y=most_popular['counts'])
+            ],
+            'layout': {
+                'title': 'Top 20 words in the training set.',
+                'yaxis': {
+                    'title': "Words"
+                },
+                'xaxis': {
+                    'title': "Count"
                 }
             }
         }
@@ -130,7 +169,7 @@ def index():
     # encode plotly graphs in JSON
     ids = ["graph-{}".format(i) for i, _ in enumerate(graphs)]
     graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
-    
+
     # render web page with plotly graphs
     return render_template('master.html', ids=ids, graphJSON=graphJSON)
 
