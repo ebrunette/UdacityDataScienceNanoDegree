@@ -40,7 +40,7 @@ This project first requires a cleaned db to be created before modeling. This is 
 
 After the database has been created, then the next step is to train the model that was created for this project: 
 1. Run the following command in the terminal after going to WebApp folder. 
-    1. python WebApp/model/train_classifier.py WebApp/data/DisasterResponse.db WebApp/model/classifier.pkl
+    1. python model/train_classifier.py data/DisasterResponse.db model/classifier.pkl
 2. The parameters for the command in 1. are as follows: 
     1. data/DisasterResponse.db 
         1. The db location from the output of the last step. 
