@@ -28,7 +28,7 @@ Displaying the results after it has competed processing:
 # How to run the Python scripts
 This project first requires a cleaned db to be created before modeling. This is done by the following steps: 
 1. Run the following command in the terminal after going to the WebApp folder. 
-    1. python WebApp/data/process_data.py WebApp/data/disaster_messages.csv WebApp/data/disaster_categories.csv sqlite:///data/DisasterResponse.db
+    1. python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv sqlite:///data/DisasterResponse.db
 2. The parameters for this are as follows: 
     1. data/process_data.py
         1. This is the first raw csv required for running the dataset, and is included in the github repo. 
@@ -40,7 +40,7 @@ This project first requires a cleaned db to be created before modeling. This is 
 
 After the database has been created, then the next step is to train the model that was created for this project: 
 1. Run the following command in the terminal after going to WebApp folder. 
-    1. python WebApp/model/train_classifier.py WebApp/data/DisasterResponse.db WebApp/model/classifier.pkl
+    1. python model/train_classifier.py data/DisasterResponse.db model/classifier.pkl
 2. The parameters for the command in 1. are as follows: 
     1. data/DisasterResponse.db 
         1. The db location from the output of the last step. 
