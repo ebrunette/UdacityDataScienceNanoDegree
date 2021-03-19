@@ -1,6 +1,7 @@
 model_parameters_dict = {
-    'LinearRegression': {
-        'normalize': [True,False]
+    'LogisticRegression': {
+        'penalty': ['l1','l2'],
+        'multi_class': ['auto','ovr']
     },
     'DecisionTreeClassifier': {
         'criterion': ['gini','entropy'],
@@ -22,5 +23,18 @@ model_parameters_dict = {
     }
 }
 
-model_names = ['LinearRegression', 'DecisionTreeClassifier', 'RandomForestClassifier', 'SVC', 'GradientBoostingClassifier']
-    
+model_names = ['LogisticRegression', 
+               'DecisionTreeClassifier', 
+               'RandomForestClassifier', 
+               'SVC', 
+               'GradientBoostingClassifier']
+
+yuan_features = [' Revenue Per Share (Yuan ¥)', 
+                 ' Operating Profit Per Share (Yuan ¥)', 
+                 ' Per Share Net profit before tax (Yuan ¥)']
+
+log_normal_features = [' Total Asset Turnover',
+                       ' Inventory Turnover Rate (times)',
+                       ' Cash/Total Assets',
+                       ' Long-term Liability to Current Assets',
+                       ]
