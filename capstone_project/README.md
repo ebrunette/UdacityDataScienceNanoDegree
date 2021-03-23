@@ -1,11 +1,13 @@
 # Project Motivation
 Usually personal stories don't come in READMEs, but this one can be a little different. My dad owned a small business that went bankrupt when I was a kid. He had some signs that he was going under, but I don't know if he recognized them, particularly not the financial ones. With this project, I am hoping to find the factors that can help other small businesses to find some warning signs in their businesses, and can help later on with doing some changes of how their business is structured or start a new change in business operations to increase the factors that help a sucessful business. 
 
+The blog post associated with this project can be found [here](https://elibrunette.medium.com/is-your-business-going-bankrupt-f42fec3c243d)
+
 # Problem Statement
 Is there any features from this dataset that will help predict if a company is going to go under, and if there is one that stands out, why? What model produces the best results, and why might that model be the best?  
 
 # Metrics used to determine this? 
-A confusion metric is the best result for the analysis 
+The F1 score was used to determine the best model for this project. That is because of the distribution of the dataset, and because recall is extremely important for this type of project because the goal of this project is to inform businesses if they are on the verge of going bankrupt to help them refactor what they are doing. Recall is used in the calculations for F1 Score, and if there is a high recall, then there is a going to be a high F1 Score. Precision is important, but if we are 100% accurate, then that should be Ok to help prompt the business to think about how to improve, even if they do not need the improvement. 
 
 # Required Libraries 
 1. pandas
