@@ -12,6 +12,7 @@ A confusion metric is the best result for the analysis
 2. matplotlib
 3. sklearn
 4. pickle
+5. seaborn
 
 # File Structure
 * Bankrupt_EDA.ipynb
@@ -43,9 +44,16 @@ The data was gathered through this [Kaggle dataset](https://www.kaggle.com/fedes
 5. [XGBoost](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html)
 
 # Model Refinement
+The base iteration didn't have any changes to the dataset. The data was all double values and was a great dataset for jumping in and doing some modeling. 
+The first iteration was turning only features containing Yuan (the currency for Taiwan) from a logistic distribution to a normal distribution for modeling. 
+The second iteration turned a large number of features into logistic distribution to a normal distribution like in the second iteration. 
 
 # Conclusions
+The model that performed the best in all three iteration was Decision Tree. The features that were the best predicters for banruptcy are Borrowing dependency, Net Value Growth Rate, and Non-industry income and expenditure/revenue based on the dataset. 
 
 # Future Work
+The future work might be adjusting the features a little more by removing some of the features that I picked that might not have had a lognormal distributionl. This would hopefully cause the feature weights to be closer together.  
 
 # Necessary Acknowledgements
+I would like to thank the graders Udacity for helping me iterating on the data and raising this project to their standards, and helping me learn the information to make this project possible. 
+I would also like to thank Kaggle for providing this dataset. 
